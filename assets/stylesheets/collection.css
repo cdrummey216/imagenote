@@ -1,0 +1,240 @@
+@custom-selector :--collection main > section.collection;
+@custom-selector :--card-info main > section.collection .card .info;
+@custom-selector :--card-line main > section.collection .card .info .line;
+
+:--collection {
+  column-count: 4;
+  column-gap: calc(var(--card-gap));
+  max-width: calc(var(--max-width) + var(--page-gap) * 2);
+  margin: 0 auto;
+  padding: calc(var(--line-height) * 5 / 2 + var(--page-gap)) var(--page-gap) 0;
+}
+
+:--collection .card {
+  display: inline-block;
+  margin-bottom: calc(var(--card-gap) - 0.25em);
+  border: var(--card-padding) var(--color-input) solid;
+  width: 100%;
+  box-shadow: 0 1px 0 var(--color-border);
+  position: relative;
+  border-radius: var(--border-radius);
+}
+
+:--collection .card p:after {
+  clear: both;
+  content: ' ';
+  display: block;
+}
+
+:--collection .card .tag.id {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+:--collection .card .tag.id:before {
+  content: '@';
+}
+
+:--collection .card .tag:before {
+  content: '#';
+  color: var(--color-alt);
+}
+
+:--collection .card .tag:after {
+  content: ', ';
+  margin-right: 0.2em;
+}
+
+:--collection .card input[type="checkbox"],
+:--collection .card .tag:last-of-type:after {
+  display: none;
+}
+
+:--collection .card label,
+:--collection .card .view-count {
+  float: right;
+}
+
+:--collection .card label {
+  cursor: pointer;
+}
+
+:--collection .card label:before {
+  content: '⁄';
+  color: var(--color-alt);
+  margin: 0 0.6em;
+}
+
+:--collection .card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  transition: opacity var(--speed-slow) ease;
+  opacity: 1;
+}
+
+:--collection .card:hover img,
+:--collection .card[data-active] img,
+:--collection .card[data-active] .info {
+  opacity: 1 !important;
+}
+
+:--collection .card .overlay img,
+:--collection .card .overlay a,
+:--collection .card .overlay {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+:--collection .card .overlay form {
+  opacity: 0;
+  position: absolute;
+  top: calc(var(--card-padding) * 2);
+  right: calc(var(--card-padding) * 2);
+  transition: opacity var(--speed-fast) ease;
+}
+
+:--collection .card:hover .info,
+:--collection .card:hover .overlay form {
+  opacity: 1;
+}
+
+:--collection .info {
+  background: linear-gradient(to bottom, transparent, var(--color-medium));
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity var(--speed-slow) ease, background var(--speed-slow) ease;
+}
+
+:--card-line {
+  position: relative;
+  color: var(--color-body);
+  padding: 0 calc(var(--card-padding) * 2);
+  margin: 0;
+  font-size: calc(1em * 3 / 4);
+  line-height: var(--line-height);
+}
+
+:--card-line:first-of-type {
+  padding-top: calc(var(--card-padding) * 1);
+}
+
+:--card-line:last-of-type {
+  padding-bottom: calc(var(--card-padding) * 1);
+}
+
+:--card-line .popup {
+  position: absolute;
+  width: 20em;
+  top: calc(var(--line-height) + 14px);
+  right: var(--card-padding);
+  background-color: var(--color-body);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 0 var(--color-shade);
+  z-index: 500;
+  display: none;
+  padding: calc(var(--card-padding) * 2);
+}
+
+:--card-line .popup:after {
+  bottom: 100%;
+  right: 3px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-bottom-color: var(--color-body);
+  border-width: 7px;
+  margin-left: -7px;
+}
+
+:--card-line .popup.comment:after {
+  right: 33px;
+}
+
+:--card-line input[type="text"] {
+  color: var(--color-dark);
+  background-color: #fff;
+  box-shadow: inset 0 1px 0 var(--color-shade);
+  border-radius: var(--border-radius);
+  border: none;
+  font-size: inherit;
+  display: block;
+  width: 100%;
+  margin-bottom: calc(var(--card-padding) * 2);
+  padding: 0 calc(var(--card-padding) * 2);
+  height: calc(var(--line-height) + 18px);
+}
+
+:--card-line input[type="text"]:focus {
+  outline: none;
+}
+
+/* Vendor prefixes suck! */
+:--card-line input[type="text"]::-webkit-input-placeholder { opacity: 1; color: var(--color-shadow); }
+:--card-line input[type="text"]:-moz-placeholder { opacity: 1; color: var(--color-shadow); }
+:--card-line input[type="text"]::-moz-placeholder { opacity: 1; color: var(--color-shadow); }
+:--card-line input[type="text"]:-ms-input-placeholder { opacity: 1; color: var(--color-shadow); }
+:--card-line input[type="text"]:placeholder { opacity: 1; color: var(--color-shadow); }
+
+:--card-line input.edit:checked ~ label.edit,
+:--card-line input.comment:checked ~ label.comment {
+  color: var(--color-bright);
+}
+
+:--card-line input.edit:checked ~ label.edit:before,
+:--card-line input.comment:checked ~ label.comment:before {
+  color: var(--color-alt);
+}
+
+:--card-line input.edit:checked ~ .popup.edit,
+:--card-line input.comment:checked ~ .popup.comment {
+  display: block;
+}
+
+:--card-line button {
+  padding: 9px var(--card-padding) 7px;
+  width: 100%;
+  font-weight: bold;
+}
+
+:--collection .comments {
+  color: var(--color-dark);
+  margin: -1px 0 calc(var(--card-padding) * 2);
+  padding: 0;
+  list-style-type: none;
+}
+
+:--collection .comments li {
+  padding: 9px 0 12px;
+  border-bottom: 1px var(--color-shade) solid;
+}
+
+:--collection .comments li:first-of-type {
+  padding-top: 0;
+}
+
+:--collection .comments time {
+  color: var(--color-medium) !important;
+}
+
+:--collection .comments form {
+  display: inline;
+  float: right;
+}
+
+:--collection .comments button {
+  width: auto !important;
+  padding: 0 4px !important;
+  margin: 0 0 -0.25em 0.5em;
+}
