@@ -3,13 +3,15 @@ name: "ImageNote"
 description: "Anonymous image gallery."
 
 # Database connection URL.
-databaseUrl: "postgres://postgres:1178@localhost:5432/imagenote"
+#databaseUrl: "postgres://postgres:1178@localhost:5432/imagenote"
+databaseUrl: "postgres://icpbbrmpopsniu:19456d726893987741f4eb49d36df21eef49dedd8434cc950b32d62d8a08874b@ec2-52-3-4-232.compute-1.amazonaws.com:5432/d9ciicm7cdf4h5"
 
 # Hidden route accessible at `/:secret`, giving admin privileges.
 secret: "topsecret"
 
 # What port number should the application listen on.
-port: 8890
+#port: 8890
+port: 5432
 
 # How many images to show per page.
 perPage: 30
