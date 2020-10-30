@@ -11,7 +11,7 @@ secret: "topsecret"
 
 # What port number should the application listen on.
 #port: 8890
-port: 5432
+port: 12782
 
 # How many images to show per page.
 perPage: 30
