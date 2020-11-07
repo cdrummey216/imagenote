@@ -10,8 +10,8 @@ databaseUrl: "postgres://icpbbrmpopsniu:19456d726893987741f4eb49d36df21eef49dedd
 secret: "topsecret"
 
 # What port number should the application listen on.
-#port: 8890
-port: 12782
+port: 8890
+#port: 12782
 
 # How many images to show per page.
 perPage: 30
